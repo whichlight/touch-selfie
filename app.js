@@ -36,7 +36,7 @@ var setup = function(){
 		pressed = 1;
 		frameNum = 0;
 		frameState= 0;
-
+        $("#face")[0].className = "hand"
 		touchmouseval(e);
 
 	})
@@ -114,26 +114,33 @@ then = Date.now();
 interval = 10;
 
 function drawFace() {
-    
 
 
-    now = Date.now();
-    elapsed = now - then;
-    if(elapsed > interval){
-    diff = (frameNum-frameState);
-    if(diff>=1){frameState+=Math.log(Math.abs(diff)+1)}
-    if(diff<0){frameState-=Math.log(Math.abs(diff)+1)}
-	frameState = Math.round(frameState);
-	then = now - (elapsed % interval);
-    }
-  
-	var percentPos = (frameState * -100) + "%";
-	$("#face").css("background-position","0" + percentPos)
-	 if(frameState ==0){
-	    $("#face").css("background-position","0 -3900%")
-    }
 
 
-	requestAnimationFrame(drawFace);
-}
+	if($("#face")[0].className == "hand"){
+		now = Date.now();
+		elapsed = now - then;
+		if(elapsed > interval){
+			diff = (frameNum-frameState);
+			if(diff>=1){frameState+=Math.log(Math.abs(diff)+1)}
+				if(diff<0){frameState-=Math.log(Math.abs(diff)+1)}
+					frameState = Math.round(frameState);
+				then = now - (elapsed % interval);
+			}
+
+			var percentPos = (frameState * -100) + "%";
+			$(".hand").css("background-position","0" + percentPos)
+			if(frameState ==0){
+				$(".hand").css("background-position","0 -3900%")
+			}
+
+			if(diff==0 && pressed==0){
+				$("#face")[0].className = "breathing"
+				$(".breathing").css("background-position","")
+			}
+
+		}
+		requestAnimationFrame(drawFace);
+	}
 
