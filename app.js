@@ -17,6 +17,29 @@ var touchmouseval = function(e){
 	touchFace(val);
 }
 
+var touchmousevalstart = function(e){
+	var val = 0;
+	if(e.clientY== undefined){
+		val = e.touches[0].clientY;
+	} else{
+		val = e.clientY;
+	}
+
+
+  var coverage = val/sidelength;
+  if(coverage<0.5){
+     frameState = 0;
+  } else{
+  	frameState=39
+  }
+ 
+  if(coverage>0.0839){
+    frameNum = Math.floor(40*coverage);
+    updateFrame(frameNum);
+  }
+
+}
+
 var touchmousevalend= function(e){
     if (((39-frameNum)-(39/2))<0){
     	frameNum =39;
@@ -36,7 +59,7 @@ var setup = function(){
 		frameNum = 0;
 		frameState= 0;
         $("#face")[0].className = "hand"
-		touchmouseval(e);
+		touchmousevalstart(e);
 
 	})
 
