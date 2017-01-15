@@ -54,7 +54,8 @@ var touchmousevalend= function(e){
 var setup = function(){
 
 
-    $("#loading").on('touchstart mousedown', function(e){;
+    $("#loading").on('touchstart mousedown', function(e){
+    	e.preventDefault();
       $("#face")[0].className = "breathing"
       this.remove();
     });
