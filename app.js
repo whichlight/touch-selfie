@@ -28,8 +28,7 @@ var touchmousevalend= function(e){
 
 var setup = function(){
 	resize();
-      
-
+    loadImages(drawFace);
 
 	$("#face").on('touchstart mousedown',function(e){
 		e.preventDefault();
@@ -65,7 +64,6 @@ var setup = function(){
 		}
 	})
 
-   drawFace();
 
 }
 
@@ -106,6 +104,28 @@ var resize = function(){
 	$c.css('height', sidelength)
 }
 
+var loadImages = function(cb){
+   loaded = 0;
+   var srcs = ["hand_sprite_square_80q.jpg","breathing_sprite_80q.jpg"];
+   srcs.forEach(function(src){
+     var img = new Image();
+     img.src = src;
+     img.onload = function(){
+     	loaded++;
+     	var progress = $("#loading").html()+" ";
+     	progress+=Math.ceil(loaded/srcs.length*100)+"%";
+        $("#loading").html(progress);
+            if(loaded == srcs.length){
+                $("#loading").remove();
+                $("#face")[0].className = "breathing"
+                cb();
+            }
+     }
+   })
+   
+
+}
+
 $(window).resize(function(){
 	resize();
 })
@@ -114,10 +134,6 @@ then = Date.now();
 interval = 10;
 
 function drawFace() {
-
-
-
-
 	if($("#face")[0].className == "hand"){
 		now = Date.now();
 		elapsed = now - then;
