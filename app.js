@@ -4,7 +4,9 @@ var frameState = 0;
 var frameNum = 0;
 
 $(document).ready(function(){
-	setup();
+
+    resize();
+    loadImages(setup);
 })
 
 var touchmouseval = function(e){
@@ -50,8 +52,12 @@ var touchmousevalend= function(e){
 }
 
 var setup = function(){
-	resize();
-    loadImages(drawFace);
+
+
+    $("#loading").on('touchstart mousedown', function(e){;
+      $("#face")[0].className = "breathing"
+      this.remove();
+    });
 
 	$("#face").on('touchstart mousedown',function(e){
 		e.preventDefault();
@@ -87,7 +93,7 @@ var setup = function(){
 		}
 	})
 
-
+    drawFace();
 }
 
 var updateFrame = function(frameNum){	
@@ -125,6 +131,11 @@ var resize = function(){
 	$c = $("#container");
 	$c.css('width', sidelength);
 	$c.css('height', sidelength)
+
+	$l = $("#loading");
+    $l.css('width', w);
+	$l.css('height', h)
+
 }
 
 var loadImages = function(cb){
@@ -139,8 +150,10 @@ var loadImages = function(cb){
      	progress+=Math.ceil(loaded/srcs.length*100)+"%";
         $("#loading").html(progress);
             if(loaded == srcs.length){
-                $("#loading").remove();
-                $("#face")[0].className = "breathing"
+
+	var progress = $("#loading").html()+" ";
+     	progress+="Done. Tap to begin";
+        $("#loading").html(progress);
                 cb();
             }
      }
