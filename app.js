@@ -141,7 +141,7 @@ var resize = function(){
 
 var loadImages = function(cb){
    loaded = 0;
-   var srcs = ["hand_sprite_square_80q.jpg","breathing_sprite_80q.jpg"];
+   var srcs = ["http://i.imgur.com/2zATuth.jpg","http://i.imgur.com/BiFgq0l.jpg"];
    srcs.forEach(function(src){
      var img = new Image();
      img.src = src;
