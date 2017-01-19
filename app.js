@@ -7,6 +7,8 @@ var lastFrameState = 0;
 var trackEventName;
 var trackEventParam;
 
+var sessionGuid = guid();
+
 $(document).ready(function() {
     setup();
 })
@@ -85,7 +87,7 @@ var updateFrame = function(frameNum) {
 
     }
     var trackParams = {
-        "session": guid(), 
+        "session": sessionGuid, 
         "timeElapsed": totalElapsed(), 
         "position": frameNum
       };
@@ -171,7 +173,7 @@ function track(name, params){
 function trackTimer(){
   window.setTimeout(function(){
     if (lastFrameState != frameState){
-      if(tt !== undefined){
+      if(tt != undefined){
         tt(trackEventName, trackEventParam);
       }
       lastFrameState = frameState;
