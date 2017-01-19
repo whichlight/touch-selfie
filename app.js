@@ -7,6 +7,18 @@ var lastFrameState = 0;
 var trackEventName;
 var trackEventParam;
 
+
+var guid = function() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+}
+
+
 var sessionGuid;
 sessionGuid = sessionGuid || guid();
 
@@ -93,16 +105,6 @@ var updateFrame = function(frameNum) {
         "position": frameNum
       };
     track("scroll-state", JSON.stringify(trackParams));
-}
-
-var guid = function() {
-    function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-        .toString(16)
-        .substring(1);
-    }
-    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-      s4() + '-' + s4() + s4() + s4();
 }
 
 
