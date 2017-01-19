@@ -7,7 +7,8 @@ var lastFrameState = 0;
 var trackEventName;
 var trackEventParam;
 
-var sessionGuid = guid();
+var sessionGuid;
+sessionGuid = sessionGuid || guid();
 
 $(document).ready(function() {
     setup();
