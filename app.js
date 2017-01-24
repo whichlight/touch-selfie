@@ -153,7 +153,7 @@ var loadImages = function(cb){
             if(loaded == srcs.length){
 
 	var progress = $("#loading").html()+" ";
-     	progress+="Done. Tap to begin";
+     	progress+="Done. Tap to begin. Drag up & down.";
         $("#loading").html(progress);
                 cb();
             }
